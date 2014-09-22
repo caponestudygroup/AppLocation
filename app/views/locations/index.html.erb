@@ -2,6 +2,7 @@
 
 <table>
   <% @locations.each do |location| %>
+    <% #cycle() toggles class of each row to 'even' and 'odd' %>
     <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
       <td class="image_td">
         <%= image_tag(location.image_url, class: 'list_image') %>
@@ -9,9 +10,10 @@
       <td class="list_line">
         <h2><%= location.title %></h2>
         <p><%= location.address1 %> <span><%= location.address2 %>, </span>
-        <span><%= location.city %>, </span><span><%= location.state %></span>
-        <span><%= location.zip %></span></p>
-        <p><%= location.description %></p>
+          <span><%= location.city %>, </span><span><%= location.state %></span><span><%= location.zip %></span>
+        </p>
+        <% #truncate() is used to display only 80 chars. strip_tags removes embedded html %>
+        <p><%= truncate(strip_tags(location.description), length: 80) %></p>
       </td>
       <td class="list_actions">
         <%= link_to 'Show', location %><br />
